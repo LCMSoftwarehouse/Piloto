@@ -171,10 +171,22 @@ st.markdown(
         box-shadow: 0 0 0 3px rgba(226, 35, 26, 0.1) !important;
     }}
     
-    /* Esconde o input de digitação dentro do select */
+    /* Esconde completamente o input de digitação dentro do select */
     [data-baseweb="select"] input {{
-        caret-color: transparent !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        position: absolute !important;
         pointer-events: none !important;
+    }}
+    
+    /* Remove a borda do container interno do input */
+    [data-baseweb="select"] [data-baseweb="input"] {{
+        border: none !important;
+        background: transparent !important;
     }}
     
     /* Dropdown menu */
