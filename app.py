@@ -49,27 +49,134 @@ st.set_page_config(
 st.markdown(
     f"""
     <style>
-    .main {{
-        background-color: {MAPLE_BG};
+    /* Força tema claro independente das configurações do sistema */
+    :root {{
+        color-scheme: light;
     }}
+    
+    /* Fundo principal */
+    .main, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {{
+        background-color: {MAPLE_BG} !important;
+    }}
+    
+    /* Sidebar */
+    [data-testid="stSidebar"], [data-testid="stSidebarContent"] {{
+        background-color: #FFFFFF !important;
+    }}
+    
+    /* Textos gerais */
+    .main p, .main span, .main label, .main div, 
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] span,
+    .stMarkdown, .stText {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* Títulos */
+    .main h1, .main h2, .main h3, .main h4, .main h5, .main h6,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3 {{
+        color: {MAPLE_RED} !important;
+    }}
+    
+    /* Classes customizadas */
     .maple-title {{
-        color: {MAPLE_RED};
+        color: {MAPLE_RED} !important;
         font-weight: 700;
         font-size: 32px;
     }}
     .maple-subtitle {{
-        color: {MAPLE_DARK};
+        color: {MAPLE_DARK} !important;
         font-size: 16px;
     }}
+    
+    /* Inputs e campos de texto */
+    .stTextInput input, .stTextArea textarea, .stSelectbox select,
+    [data-testid="stTextInput"] input,
+    [data-testid="stTextArea"] textarea {{
+        background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
+        border: 1px solid #CCCCCC !important;
+    }}
+    
+    /* Labels dos inputs */
+    .stTextInput label, .stTextArea label, .stSelectbox label, .stRadio label,
+    [data-testid="stWidgetLabel"] {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* Radio buttons */
+    .stRadio div[role="radiogroup"] label {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* Selectbox */
+    [data-testid="stSelectbox"] div[data-baseweb="select"] {{
+        background-color: #FFFFFF !important;
+    }}
+    [data-testid="stSelectbox"] div[data-baseweb="select"] * {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {{
+        background-color: transparent !important;
+    }}
+    .stTabs [data-baseweb="tab"] {{
+        color: {MAPLE_DARK} !important;
+    }}
+    .stTabs [aria-selected="true"] {{
+        color: {MAPLE_RED} !important;
+    }}
+    
+    /* Expanders */
+    .streamlit-expanderHeader {{
+        background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
+    }}
+    .streamlit-expanderContent {{
+        background-color: #FFFFFF !important;
+    }}
+    
+    /* DataFrames/Tables */
+    .stDataFrame, [data-testid="stDataFrame"] {{
+        background-color: #FFFFFF !important;
+    }}
+    .stDataFrame th, .stDataFrame td {{
+        color: {MAPLE_DARK} !important;
+        background-color: #FFFFFF !important;
+    }}
+    
+    /* Botões */
     .stButton>button {{
-        background-color: {MAPLERED if False else MAPLE_RED};
-        color: white;
+        background-color: {MAPLE_RED} !important;
+        color: white !important;
         border-radius: 6px;
         border: none;
     }}
     .stButton>button:hover {{
-        background-color: {MAPLE_DARK};
-        color: white;
+        background-color: {MAPLE_DARK} !important;
+        color: white !important;
+    }}
+    
+    /* Form */
+    [data-testid="stForm"] {{
+        background-color: #FFFFFF !important;
+        border: 1px solid #EEEEEE !important;
+        border-radius: 8px;
+        padding: 1rem;
+    }}
+    
+    /* Alertas */
+    .stAlert {{
+        background-color: #FFFFFF !important;
+    }}
+    
+    /* Download button */
+    .stDownloadButton button {{
+        background-color: {MAPLE_GOLD} !important;
+        color: {MAPLE_DARK} !important;
     }}
     </style>
     """,
