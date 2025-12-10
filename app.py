@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
-LOGO_FILE = "image.jpg"
+LOGO_FILE = "image.png"
 LOGO_PATH = os.path.join(BASE_DIR, LOGO_FILE)
 
 DB_PATH = os.path.join(DATA_DIR, "avaliacoes_maplebear.db")
