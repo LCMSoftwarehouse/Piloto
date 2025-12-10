@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
-LOGO_FILE = "images.png"
+LOGO_FILE = "image.jpg"
 LOGO_PATH = os.path.join(BASE_DIR, LOGO_FILE)
 
 DB_PATH = os.path.join(DATA_DIR, "avaliacoes_maplebear.db")
@@ -49,34 +49,54 @@ st.set_page_config(
 st.markdown(
     f"""
     <style>
-    /* Força tema claro independente das configurações do sistema */
-    :root {{
-        color-scheme: light;
+    /* ============================================
+       FORÇA TEMA CLARO - OVERRIDE COMPLETO
+       ============================================ */
+    
+    /* Reset de color-scheme */
+    :root, html, body {{
+        color-scheme: light only !important;
     }}
     
-    /* Fundo principal */
-    .main, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {{
+    /* Fundo principal de toda a aplicação */
+    html, body, .main, .stApp, 
+    [data-testid="stAppViewContainer"],
+    [data-testid="stHeader"],
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    [data-testid="stStatusWidget"],
+    .block-container {{
         background-color: {MAPLE_BG} !important;
+        color: {MAPLE_DARK} !important;
     }}
     
     /* Sidebar */
-    [data-testid="stSidebar"], [data-testid="stSidebarContent"] {{
+    [data-testid="stSidebar"],
+    [data-testid="stSidebarContent"],
+    [data-testid="stSidebarNav"],
+    section[data-testid="stSidebar"] > div {{
         background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
     }}
     
-    /* Textos gerais */
-    .main p, .main span, .main label, .main div, 
+    /* ============================================
+       TEXTOS E LABELS
+       ============================================ */
+    p, span, label, div, li, td, th,
+    .stMarkdown, .stText,
+    [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] p,
     [data-testid="stMarkdownContainer"] span,
-    .stMarkdown, .stText {{
+    [data-testid="stMarkdownContainer"] li {{
         color: {MAPLE_DARK} !important;
     }}
     
     /* Títulos */
-    .main h1, .main h2, .main h3, .main h4, .main h5, .main h6,
+    h1, h2, h3, h4, h5, h6,
     [data-testid="stMarkdownContainer"] h1,
     [data-testid="stMarkdownContainer"] h2,
-    [data-testid="stMarkdownContainer"] h3 {{
+    [data-testid="stMarkdownContainer"] h3,
+    [data-testid="stMarkdownContainer"] h4 {{
         color: {MAPLE_RED} !important;
     }}
     
@@ -91,93 +111,251 @@ st.markdown(
         font-size: 16px;
     }}
     
-    /* Inputs e campos de texto */
-    .stTextInput input, .stTextArea textarea, .stSelectbox select,
+    /* ============================================
+       INPUTS DE TEXTO
+       ============================================ */
+    input, textarea,
+    .stTextInput input,
+    .stTextArea textarea,
     [data-testid="stTextInput"] input,
-    [data-testid="stTextArea"] textarea {{
+    [data-testid="stTextArea"] textarea,
+    [data-baseweb="input"] input,
+    [data-baseweb="textarea"] textarea {{
         background-color: #FFFFFF !important;
         color: {MAPLE_DARK} !important;
         border: 1px solid #CCCCCC !important;
+        -webkit-text-fill-color: {MAPLE_DARK} !important;
     }}
     
-    /* Labels dos inputs */
-    .stTextInput label, .stTextArea label, .stSelectbox label, .stRadio label,
-    [data-testid="stWidgetLabel"] {{
-        color: {MAPLE_DARK} !important;
+    /* Placeholder dos inputs */
+    input::placeholder, textarea::placeholder {{
+        color: #999999 !important;
+        -webkit-text-fill-color: #999999 !important;
     }}
     
-    /* Radio buttons */
-    .stRadio div[role="radiogroup"] label {{
-        color: {MAPLE_DARK} !important;
-    }}
-    
-    /* Selectbox */
-    [data-testid="stSelectbox"] div[data-baseweb="select"] {{
+    /* Container dos inputs */
+    [data-baseweb="input"],
+    [data-baseweb="textarea"],
+    [data-baseweb="base-input"] {{
         background-color: #FFFFFF !important;
     }}
-    [data-testid="stSelectbox"] div[data-baseweb="select"] * {{
+    
+    /* ============================================
+       SELECTBOX / DROPDOWN
+       ============================================ */
+    [data-testid="stSelectbox"],
+    [data-baseweb="select"],
+    [data-baseweb="select"] > div,
+    [data-baseweb="select"] > div > div,
+    [data-baseweb="popover"],
+    [data-baseweb="menu"],
+    ul[role="listbox"],
+    ul[role="listbox"] li,
+    [data-baseweb="menu"] ul,
+    [data-baseweb="menu"] li {{
+        background-color: #FFFFFF !important;
         color: {MAPLE_DARK} !important;
     }}
     
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {{
+    /* Texto dentro do select */
+    [data-baseweb="select"] span,
+    [data-baseweb="select"] div[class*="value"] {{
+        color: {MAPLE_DARK} !important;
+        -webkit-text-fill-color: {MAPLE_DARK} !important;
+    }}
+    
+    /* Ícone do dropdown */
+    [data-baseweb="select"] svg {{
+        fill: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       RADIO BUTTONS
+       ============================================ */
+    .stRadio,
+    .stRadio > div,
+    .stRadio label,
+    .stRadio [role="radiogroup"],
+    .stRadio [role="radiogroup"] label,
+    [data-testid="stRadio"],
+    [data-testid="stRadio"] label {{
+        color: {MAPLE_DARK} !important;
         background-color: transparent !important;
     }}
-    .stTabs [data-baseweb="tab"] {{
-        color: {MAPLE_DARK} !important;
-    }}
-    .stTabs [aria-selected="true"] {{
-        color: {MAPLE_RED} !important;
+    
+    /* Círculo do radio */
+    .stRadio [data-baseweb="radio"] > div:first-child,
+    [data-baseweb="radio"] > div:first-child {{
+        background-color: #FFFFFF !important;
+        border-color: {MAPLE_RED} !important;
     }}
     
-    /* Expanders */
-    .streamlit-expanderHeader {{
-        background-color: #FFFFFF !important;
-        color: {MAPLE_DARK} !important;
-    }}
-    .streamlit-expanderContent {{
-        background-color: #FFFFFF !important;
-    }}
-    
-    /* DataFrames/Tables */
-    .stDataFrame, [data-testid="stDataFrame"] {{
-        background-color: #FFFFFF !important;
-    }}
-    .stDataFrame th, .stDataFrame td {{
-        color: {MAPLE_DARK} !important;
-        background-color: #FFFFFF !important;
-    }}
-    
-    /* Botões */
-    .stButton>button {{
+    /* Radio selecionado */
+    .stRadio [data-baseweb="radio"][data-checked="true"] > div:first-child,
+    [data-baseweb="radio"] input:checked + div {{
         background-color: {MAPLE_RED} !important;
-        color: white !important;
-        border-radius: 6px;
-        border: none;
-    }}
-    .stButton>button:hover {{
-        background-color: {MAPLE_DARK} !important;
-        color: white !important;
+        border-color: {MAPLE_RED} !important;
     }}
     
-    /* Form */
-    [data-testid="stForm"] {{
-        background-color: #FFFFFF !important;
-        border: 1px solid #EEEEEE !important;
-        border-radius: 8px;
-        padding: 1rem;
+    /* ============================================
+       CHECKBOX
+       ============================================ */
+    .stCheckbox,
+    .stCheckbox label,
+    [data-testid="stCheckbox"],
+    [data-testid="stCheckbox"] label {{
+        color: {MAPLE_DARK} !important;
     }}
     
-    /* Alertas */
-    .stAlert {{
+    [data-baseweb="checkbox"] > div:first-child {{
         background-color: #FFFFFF !important;
+        border-color: #CCCCCC !important;
+    }}
+    
+    [data-baseweb="checkbox"][data-checked="true"] > div:first-child {{
+        background-color: {MAPLE_RED} !important;
+        border-color: {MAPLE_RED} !important;
+    }}
+    
+    /* ============================================
+       BOTÕES
+       ============================================ */
+    button,
+    .stButton > button,
+    [data-testid="stButton"] > button,
+    [data-testid="baseButton-secondary"],
+    [data-testid="baseButton-primary"] {{
+        background-color: {MAPLE_RED} !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 6px !important;
+    }}
+    
+    button:hover,
+    .stButton > button:hover {{
+        background-color: #C41E17 !important;
+        color: #FFFFFF !important;
+    }}
+    
+    /* Form submit button */
+    .stFormSubmitButton > button,
+    [data-testid="stFormSubmitButton"] > button {{
+        background-color: {MAPLE_RED} !important;
+        color: #FFFFFF !important;
     }}
     
     /* Download button */
-    .stDownloadButton button {{
+    .stDownloadButton > button {{
         background-color: {MAPLE_GOLD} !important;
         color: {MAPLE_DARK} !important;
     }}
+    
+    /* ============================================
+       TABS
+       ============================================ */
+    .stTabs,
+    .stTabs [data-baseweb="tab-list"],
+    .stTabs [data-baseweb="tab-panel"] {{
+        background-color: transparent !important;
+    }}
+    
+    .stTabs [data-baseweb="tab"] {{
+        color: {MAPLE_DARK} !important;
+        background-color: transparent !important;
+    }}
+    
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {{
+        color: {MAPLE_RED} !important;
+        border-bottom-color: {MAPLE_RED} !important;
+    }}
+    
+    /* ============================================
+       EXPANDER
+       ============================================ */
+    .streamlit-expanderHeader,
+    [data-testid="stExpander"],
+    [data-testid="stExpander"] summary,
+    details, summary {{
+        background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    .streamlit-expanderContent,
+    [data-testid="stExpander"] > div {{
+        background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       DATAFRAME / TABELAS
+       ============================================ */
+    .stDataFrame,
+    [data-testid="stDataFrame"],
+    [data-testid="stDataFrame"] > div,
+    .stDataFrame table,
+    .stDataFrame th,
+    .stDataFrame td,
+    table, th, td {{
+        background-color: #FFFFFF !important;
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       FORMS
+       ============================================ */
+    [data-testid="stForm"],
+    .stForm {{
+        background-color: #FFFFFF !important;
+        border: 1px solid #EEEEEE !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+    }}
+    
+    /* ============================================
+       ALERTAS E MENSAGENS
+       ============================================ */
+    .stAlert,
+    [data-testid="stAlert"],
+    .stSuccess, .stError, .stWarning, .stInfo {{
+        background-color: #FFFFFF !important;
+    }}
+    
+    .stAlert p, .stAlert span {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       WIDGET LABELS
+       ============================================ */
+    [data-testid="stWidgetLabel"],
+    [data-testid="stWidgetLabel"] p,
+    .stWidgetLabel {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       ÍCONES E SVGs
+       ============================================ */
+    svg:not([fill="none"]) {{
+        fill: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       METRIC
+       ============================================ */
+    [data-testid="stMetric"],
+    [data-testid="stMetricValue"],
+    [data-testid="stMetricLabel"] {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
+    /* ============================================
+       DIVIDERS
+       ============================================ */
+    hr {{
+        border-color: #DDDDDD !important;
+    }}
+    
     </style>
     """,
     unsafe_allow_html=True
