@@ -1,0 +1,8 @@
+[theme]
+# Força tema claro Maple Bear
+base = "light"
+primaryColor = "#E2231A"
+backgroundColor = "#FFF5E9"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#333333"
+font = "sans serif"
