@@ -50,15 +50,14 @@ st.markdown(
     f"""
     <style>
     /* ============================================
-       FORÇA TEMA CLARO - OVERRIDE COMPLETO
+       TEMA CLARO MODERNO - MAPLE BEAR
        ============================================ */
     
-    /* Reset de color-scheme */
     :root, html, body {{
         color-scheme: light only !important;
     }}
     
-    /* Fundo principal de toda a aplicação */
+    /* Fundo principal */
     html, body, .main, .stApp, 
     [data-testid="stAppViewContainer"],
     [data-testid="stHeader"],
@@ -73,10 +72,8 @@ st.markdown(
     /* Sidebar */
     [data-testid="stSidebar"],
     [data-testid="stSidebarContent"],
-    [data-testid="stSidebarNav"],
     section[data-testid="stSidebar"] > div {{
         background-color: #FFFFFF !important;
-        color: {MAPLE_DARK} !important;
     }}
     
     /* ============================================
@@ -86,33 +83,38 @@ st.markdown(
     .stMarkdown, .stText,
     [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] p,
-    [data-testid="stMarkdownContainer"] span,
-    [data-testid="stMarkdownContainer"] li {{
+    [data-testid="stMarkdownContainer"] span {{
         color: {MAPLE_DARK} !important;
     }}
     
-    /* Títulos */
-    h1, h2, h3, h4, h5, h6,
+    /* Títulos - cor mais elegante */
+    h1, h2, h3,
     [data-testid="stMarkdownContainer"] h1,
     [data-testid="stMarkdownContainer"] h2,
-    [data-testid="stMarkdownContainer"] h3,
-    [data-testid="stMarkdownContainer"] h4 {{
+    [data-testid="stMarkdownContainer"] h3 {{
         color: {MAPLE_RED} !important;
     }}
     
-    /* Classes customizadas */
+    /* Subtítulos h4, h5, h6 - cinza escuro */
+    h4, h5, h6,
+    [data-testid="stMarkdownContainer"] h4,
+    [data-testid="stMarkdownContainer"] h5,
+    [data-testid="stMarkdownContainer"] h6 {{
+        color: {MAPLE_DARK} !important;
+    }}
+    
     .maple-title {{
         color: {MAPLE_RED} !important;
         font-weight: 700;
         font-size: 32px;
     }}
     .maple-subtitle {{
-        color: {MAPLE_DARK} !important;
+        color: #666666 !important;
         font-size: 16px;
     }}
     
     /* ============================================
-       INPUTS DE TEXTO
+       INPUTS DE TEXTO - MODERNO
        ============================================ */
     input, textarea,
     .stTextInput input,
@@ -123,93 +125,145 @@ st.markdown(
     [data-baseweb="textarea"] textarea {{
         background-color: #FFFFFF !important;
         color: {MAPLE_DARK} !important;
-        border: 1px solid #CCCCCC !important;
+        border: 2px solid #D0D0D0 !important;
+        border-radius: 8px !important;
         -webkit-text-fill-color: {MAPLE_DARK} !important;
+        padding: 10px 12px !important;
+        transition: border-color 0.2s ease !important;
     }}
     
-    /* Placeholder dos inputs */
+    input:focus, textarea:focus,
+    .stTextInput input:focus,
+    .stTextArea textarea:focus {{
+        border-color: {MAPLE_RED} !important;
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(226, 35, 26, 0.1) !important;
+    }}
+    
     input::placeholder, textarea::placeholder {{
-        color: #999999 !important;
-        -webkit-text-fill-color: #999999 !important;
+        color: #AAAAAA !important;
+        -webkit-text-fill-color: #AAAAAA !important;
     }}
     
-    /* Container dos inputs */
     [data-baseweb="input"],
     [data-baseweb="textarea"],
     [data-baseweb="base-input"] {{
         background-color: #FFFFFF !important;
+        border-radius: 8px !important;
     }}
     
     /* ============================================
-       SELECTBOX / DROPDOWN
+       SELECTBOX / DROPDOWN - BORDAS VISÍVEIS
        ============================================ */
-    [data-testid="stSelectbox"],
-    [data-baseweb="select"],
-    [data-baseweb="select"] > div,
-    [data-baseweb="select"] > div > div,
+    [data-baseweb="select"] > div {{
+        background-color: #FFFFFF !important;
+        border: 2px solid #D0D0D0 !important;
+        border-radius: 8px !important;
+        min-height: 42px !important;
+    }}
+    
+    [data-baseweb="select"] > div:hover {{
+        border-color: #B0B0B0 !important;
+    }}
+    
+    [data-baseweb="select"] > div:focus-within {{
+        border-color: {MAPLE_RED} !important;
+        box-shadow: 0 0 0 3px rgba(226, 35, 26, 0.1) !important;
+    }}
+    
+    /* Dropdown menu */
     [data-baseweb="popover"],
     [data-baseweb="menu"],
     ul[role="listbox"],
+    [data-baseweb="menu"] ul {{
+        background-color: #FFFFFF !important;
+        border: 1px solid #D0D0D0 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    }}
+    
     ul[role="listbox"] li,
-    [data-baseweb="menu"] ul,
     [data-baseweb="menu"] li {{
         background-color: #FFFFFF !important;
         color: {MAPLE_DARK} !important;
     }}
     
+    ul[role="listbox"] li:hover,
+    [data-baseweb="menu"] li:hover {{
+        background-color: #FFF0E8 !important;
+    }}
+    
     /* Texto dentro do select */
     [data-baseweb="select"] span,
-    [data-baseweb="select"] div[class*="value"] {{
+    [data-baseweb="select"] div {{
         color: {MAPLE_DARK} !important;
         -webkit-text-fill-color: {MAPLE_DARK} !important;
     }}
     
-    /* Ícone do dropdown */
+    /* Ícone seta do dropdown */
     [data-baseweb="select"] svg {{
-        fill: {MAPLE_DARK} !important;
+        fill: #666666 !important;
     }}
     
     /* ============================================
-       RADIO BUTTONS
+       RADIO BUTTONS - ESTILO MODERNO
        ============================================ */
-    .stRadio,
-    .stRadio > div,
     .stRadio label,
-    .stRadio [role="radiogroup"],
     .stRadio [role="radiogroup"] label,
-    [data-testid="stRadio"],
     [data-testid="stRadio"] label {{
         color: {MAPLE_DARK} !important;
-        background-color: transparent !important;
+        font-size: 14px !important;
     }}
     
-    /* Círculo do radio */
-    .stRadio [data-baseweb="radio"] > div:first-child,
+    /* Container do radio - bolinha */
     [data-baseweb="radio"] > div:first-child {{
+        width: 20px !important;
+        height: 20px !important;
+        border: 2px solid #B0B0B0 !important;
+        border-radius: 50% !important;
         background-color: #FFFFFF !important;
+        transition: all 0.2s ease !important;
+    }}
+    
+    /* Hover na bolinha */
+    [data-baseweb="radio"]:hover > div:first-child {{
         border-color: {MAPLE_RED} !important;
     }}
     
-    /* Radio selecionado */
-    .stRadio [data-baseweb="radio"][data-checked="true"] > div:first-child,
-    [data-baseweb="radio"] input:checked + div {{
+    /* Radio selecionado - bolinha preenchida */
+    [data-baseweb="radio"] > div:first-child > div {{
         background-color: {MAPLE_RED} !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+    }}
+    
+    /* Quando selecionado, borda também fica vermelha */
+    [data-baseweb="radio"]:has(input:checked) > div:first-child,
+    [data-baseweb="radio"][data-checked="true"] > div:first-child {{
         border-color: {MAPLE_RED} !important;
+        background-color: #FFFFFF !important;
     }}
     
     /* ============================================
-       CHECKBOX
+       CHECKBOX - ESTILO MODERNO
        ============================================ */
-    .stCheckbox,
     .stCheckbox label,
-    [data-testid="stCheckbox"],
     [data-testid="stCheckbox"] label {{
         color: {MAPLE_DARK} !important;
     }}
     
     [data-baseweb="checkbox"] > div:first-child {{
+        width: 20px !important;
+        height: 20px !important;
+        border: 2px solid #B0B0B0 !important;
+        border-radius: 4px !important;
         background-color: #FFFFFF !important;
-        border-color: #CCCCCC !important;
+        transition: all 0.2s ease !important;
+    }}
+    
+    [data-baseweb="checkbox"]:hover > div:first-child {{
+        border-color: {MAPLE_RED} !important;
     }}
     
     [data-baseweb="checkbox"][data-checked="true"] > div:first-child {{
@@ -218,72 +272,84 @@ st.markdown(
     }}
     
     /* ============================================
-       BOTÕES
+       BOTÕES - MODERNO
        ============================================ */
-    button,
     .stButton > button,
-    [data-testid="stButton"] > button,
-    [data-testid="baseButton-secondary"],
-    [data-testid="baseButton-primary"] {{
-        background-color: {MAPLE_RED} !important;
-        color: #FFFFFF !important;
-        border: none !important;
-        border-radius: 6px !important;
-    }}
-    
-    button:hover,
-    .stButton > button:hover {{
-        background-color: #C41E17 !important;
-        color: #FFFFFF !important;
-    }}
-    
-    /* Form submit button */
-    .stFormSubmitButton > button,
     [data-testid="stFormSubmitButton"] > button {{
         background-color: {MAPLE_RED} !important;
         color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 10px 24px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 4px rgba(226, 35, 26, 0.2) !important;
+    }}
+    
+    .stButton > button:hover,
+    [data-testid="stFormSubmitButton"] > button:hover {{
+        background-color: #C41E17 !important;
+        box-shadow: 0 4px 8px rgba(226, 35, 26, 0.3) !important;
+        transform: translateY(-1px) !important;
     }}
     
     /* Download button */
     .stDownloadButton > button {{
         background-color: {MAPLE_GOLD} !important;
         color: {MAPLE_DARK} !important;
+        box-shadow: 0 2px 4px rgba(249, 194, 60, 0.3) !important;
+    }}
+    
+    .stDownloadButton > button:hover {{
+        background-color: #E5B035 !important;
     }}
     
     /* ============================================
        TABS
        ============================================ */
-    .stTabs,
-    .stTabs [data-baseweb="tab-list"],
-    .stTabs [data-baseweb="tab-panel"] {{
+    .stTabs [data-baseweb="tab-list"] {{
         background-color: transparent !important;
+        gap: 8px !important;
     }}
     
     .stTabs [data-baseweb="tab"] {{
-        color: {MAPLE_DARK} !important;
+        color: #666666 !important;
         background-color: transparent !important;
+        border-radius: 8px 8px 0 0 !important;
+        padding: 10px 20px !important;
     }}
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {{
         color: {MAPLE_RED} !important;
-        border-bottom-color: {MAPLE_RED} !important;
+        font-weight: 600 !important;
+        border-bottom: 3px solid {MAPLE_RED} !important;
+    }}
+    
+    /* ============================================
+       FORMS
+       ============================================ */
+    [data-testid="stForm"] {{
+        background-color: #FFFFFF !important;
+        border: 1px solid #E8E8E8 !important;
+        border-radius: 12px !important;
+        padding: 24px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
     }}
     
     /* ============================================
        EXPANDER
        ============================================ */
-    .streamlit-expanderHeader,
     [data-testid="stExpander"],
-    [data-testid="stExpander"] summary,
-    details, summary {{
+    details {{
         background-color: #FFFFFF !important;
-        color: {MAPLE_DARK} !important;
+        border: 1px solid #E8E8E8 !important;
+        border-radius: 8px !important;
     }}
     
-    .streamlit-expanderContent,
-    [data-testid="stExpander"] > div {{
-        background-color: #FFFFFF !important;
+    [data-testid="stExpander"] summary,
+    details summary {{
         color: {MAPLE_DARK} !important;
+        font-weight: 500 !important;
     }}
     
     /* ============================================
@@ -291,69 +357,52 @@ st.markdown(
        ============================================ */
     .stDataFrame,
     [data-testid="stDataFrame"],
-    [data-testid="stDataFrame"] > div,
-    .stDataFrame table,
-    .stDataFrame th,
-    .stDataFrame td,
-    table, th, td {{
+    table {{
         background-color: #FFFFFF !important;
-        color: {MAPLE_DARK} !important;
-    }}
-    
-    /* ============================================
-       FORMS
-       ============================================ */
-    [data-testid="stForm"],
-    .stForm {{
-        background-color: #FFFFFF !important;
-        border: 1px solid #EEEEEE !important;
         border-radius: 8px !important;
-        padding: 1rem !important;
+        overflow: hidden !important;
     }}
     
-    /* ============================================
-       ALERTAS E MENSAGENS
-       ============================================ */
-    .stAlert,
-    [data-testid="stAlert"],
-    .stSuccess, .stError, .stWarning, .stInfo {{
+    th {{
+        background-color: #F8F8F8 !important;
+        color: {MAPLE_DARK} !important;
+        font-weight: 600 !important;
+    }}
+    
+    td {{
         background-color: #FFFFFF !important;
-    }}
-    
-    .stAlert p, .stAlert span {{
         color: {MAPLE_DARK} !important;
     }}
     
     /* ============================================
-       WIDGET LABELS
+       ALERTAS
+       ============================================ */
+    .stAlert {{
+        border-radius: 8px !important;
+    }}
+    
+    /* ============================================
+       LABELS DOS WIDGETS
        ============================================ */
     [data-testid="stWidgetLabel"],
-    [data-testid="stWidgetLabel"] p,
-    .stWidgetLabel {{
-        color: {MAPLE_DARK} !important;
-    }}
-    
-    /* ============================================
-       ÍCONES E SVGs
-       ============================================ */
-    svg:not([fill="none"]) {{
-        fill: {MAPLE_DARK} !important;
-    }}
-    
-    /* ============================================
-       METRIC
-       ============================================ */
-    [data-testid="stMetric"],
-    [data-testid="stMetricValue"],
-    [data-testid="stMetricLabel"] {{
-        color: {MAPLE_DARK} !important;
+    [data-testid="stWidgetLabel"] p {{
+        color: #555555 !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
     }}
     
     /* ============================================
        DIVIDERS
        ============================================ */
     hr {{
-        border-color: #DDDDDD !important;
+        border-color: #E8E8E8 !important;
+    }}
+    
+    /* ============================================
+       TEXT AREA
+       ============================================ */
+    .stTextArea textarea {{
+        min-height: 120px !important;
     }}
     
     </style>
