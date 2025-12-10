@@ -171,6 +171,12 @@ st.markdown(
         box-shadow: 0 0 0 3px rgba(226, 35, 26, 0.1) !important;
     }}
     
+    /* Esconde o input de digitação dentro do select */
+    [data-baseweb="select"] input {{
+        caret-color: transparent !important;
+        pointer-events: none !important;
+    }}
+    
     /* Dropdown menu */
     [data-baseweb="popover"],
     [data-baseweb="menu"],
@@ -215,7 +221,7 @@ st.markdown(
         font-size: 14px !important;
     }}
     
-    /* Container do radio - bolinha */
+    /* Container do radio - bolinha externa (borda) */
     [data-baseweb="radio"] > div:first-child {{
         width: 20px !important;
         height: 20px !important;
@@ -225,17 +231,26 @@ st.markdown(
         transition: all 0.2s ease !important;
     }}
     
-    /* Hover na bolinha */
+    /* Bolinha interna - ESCONDIDA por padrão */
+    [data-baseweb="radio"] > div:first-child > div {{
+        background-color: transparent !important;
+        width: 0px !important;
+        height: 0px !important;
+        border-radius: 50% !important;
+        transition: all 0.2s ease !important;
+    }}
+    
+    /* Hover na bolinha - só muda a borda */
     [data-baseweb="radio"]:hover > div:first-child {{
         border-color: {MAPLE_RED} !important;
     }}
     
-    /* Radio selecionado - bolinha preenchida */
-    [data-baseweb="radio"] > div:first-child > div {{
+    /* Radio SELECIONADO - bolinha interna vermelha aparece */
+    [data-baseweb="radio"]:has(input:checked) > div:first-child > div,
+    [data-baseweb="radio"][data-checked="true"] > div:first-child > div {{
         background-color: {MAPLE_RED} !important;
         width: 10px !important;
         height: 10px !important;
-        border-radius: 50% !important;
     }}
     
     /* Quando selecionado, borda também fica vermelha */
