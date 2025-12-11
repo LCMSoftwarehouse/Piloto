@@ -26,8 +26,18 @@ OPENAI_ENABLED = client is not None
 # =========================================================
 # Usar diretório relativo ao script para funcionar em qualquer ambiente
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "data")
-os.makedirs(DATA_DIR, exist_ok=True)
+
+# No Streamlit Cloud, usar diretório temporário para dados persistentes
+# ATENÇÃO: No Streamlit Cloud, os dados são perdidos quando o app reinicia!
+# Para persistência real, use um banco externo (Supabase, PlanetScale, etc.)
+import tempfile
+if os.environ.get("STREAMLIT_SHARING_MODE") or os.path.exists("/mount/src"):
+    # Estamos no Streamlit Cloud
+    DATA_DIR = tempfile.gettempdir()
+else:
+    # Estamos em ambiente local
+    DATA_DIR = os.path.join(BASE_DIR, "data")
+    os.makedirs(DATA_DIR, exist_ok=True)
 
 LOGO_FILE = "image.png"
 LOGO_PATH = os.path.join(BASE_DIR, LOGO_FILE)
