@@ -15,7 +15,9 @@ from openai import OpenAI
 # CONFIGURAÇÃO OPENAI
 # =========================================================
 # A API key deve ser configurada como variável de ambiente ou nos secrets do Streamlit
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY", "") if hasattr(st, 'secrets') else "")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+if not OPENAI_API_KEY and hasattr(st, 'secrets') and "OPENAI_API_KEY" in st.secrets:
+    OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY and OPENAI_API_KEY.strip() else None
 OPENAI_ENABLED = client is not None
 
@@ -1525,22 +1527,38 @@ if "reprint_id" not in st.session_state:
     st.session_state["reprint_id"] = None
 
 
+# =========================================================
+# FUNÇÃO AJUSTADA – RESET DA AVALIAÇÃO
+# =========================================================
 def resetar_avaliacao():
+    # =============================
+    # CAMPOS DE CADASTRO
+    # =============================
     st.session_state["nome_crianca"] = ""
     st.session_state["idade_crianca"] = ""
-    st.session_state["sexo_crianca"] = ""
     st.session_state["nome_professora"] = ""
     st.session_state["turma_crianca"] = ""
+
+    # Sexo: volta para a primeira opção do selectbox
+    st.session_state["sexo_crianca"] = ""
+
+    # Trimestre: volta para a primeira opção do selectbox
     st.session_state["trimestre_ref"] = ""
 
+    # =============================
+    # RESPOSTAS DOS ITENS (RADIOS)
+    # =============================
     for dom_code, dom_data in DOMAINS.items():
         for item_code, _ in dom_data["itens"]:
             key = f"{dom_code}_{item_code}"
-            if key in st.session_state:
-                del st.session_state[key]
+            # Deixa o radio SEM seleção
+            st.session_state[key] = None
 
+    # =============================
+    # RESULTADO GERADO
+    # =============================
     st.session_state["resultado"] = None
-    st.rerun()
+
 
 # =========================================================
 # LAYOUT – TABS
